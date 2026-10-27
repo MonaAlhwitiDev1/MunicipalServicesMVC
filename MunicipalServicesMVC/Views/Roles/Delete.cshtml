@@ -1,0 +1,109 @@
+﻿@model MunicipalServicesMVC.Domain.Models.Role
+
+@{
+    ViewData["Title"] = "حذف الدور";
+}
+
+<div class="container-fluid py-4" dir="rtl">
+
+    <!-- عنوان الصفحة -->
+    <div class="mb-4">
+
+        <h2 class="fw-bold mb-0"
+            style="color:var(--main-green-dark);">
+            حذف الدور
+        </h2>
+
+    </div>
+
+    <!-- بطاقة حذف الدور -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-8 col-lg-9 col-md-11">
+
+            <div class="card border-0 shadow-sm">
+
+                <!-- الشريط الأخضر -->
+                <div class="card-header bg-success text-white py-3">
+
+                    <h5 class="fw-bold mb-0">
+                        بيانات الدور
+                    </h5>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- رسالة تأكيد الحذف -->
+                    <div class="alert alert-danger text-center mb-4">
+
+                        <strong>
+                            هل أنت متأكد من حذف هذا الدور؟
+                        </strong>
+
+                    </div>
+
+                    <!-- اسم الدور -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            اسم الدور
+                        </label>
+
+                        <input type="text"
+                               value="@Model.Name"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <!-- وصف الدور -->
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+                            وصف الدور
+                        </label>
+
+                        <textarea class="form-control"
+                                  rows="4"
+                                  readonly>@Model.Description</textarea>
+
+                    </div>
+
+                    <!-- نموذج الحذف -->
+                    <form asp-action="Delete" method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <!-- رقم الدور -->
+                        <input type="hidden"
+                               asp-for="Id" />
+
+                        <!-- أزرار العمليات -->
+                        <div class="d-flex flex-wrap justify-content-end gap-2 pt-3 border-top">
+
+                            <!-- زر الرجوع -->
+                            <a asp-action="Index"
+                               class="btn btn-warning px-4">
+                                رجوع
+                            </a>
+
+                            <!-- زر تأكيد الحذف -->
+                            <button type="submit"
+                                    class="btn btn-danger px-4">
+                                تأكيد الحذف
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

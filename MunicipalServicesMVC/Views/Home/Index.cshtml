@@ -1,0 +1,283 @@
+﻿@{
+    ViewData["Title"] = "لوحة التحكم";
+
+    var latestEmployees = ViewBag.LatestEmployees
+        as List<MunicipalServicesMVC.Domain.Models.Employee>
+        ?? new List<MunicipalServicesMVC.Domain.Models.Employee>();
+
+    var latestServices = ViewBag.LatestServices
+        as List<MunicipalServicesMVC.Domain.Models.Service>
+        ?? new List<MunicipalServicesMVC.Domain.Models.Service>();
+}
+
+<div class="dashboard-page">
+
+    <!-- قسم الترحيب -->
+    <section class="dashboard-header">
+        <span class="dashboard-label">لوحة الإدارة</span>
+
+        <h1>مرحباً بك في نظام إدارة الخدمات البلدية 👋</h1>
+
+        <p>
+            يمكنك متابعة الإدارات والموظفين والخدمات
+            وإدارة بيانات النظام من مكان واحد.
+        </p>
+    </section>
+
+
+    <!-- بطاقات الإحصائيات -->
+    <div class="row g-4 dashboard-stats">
+
+        <!-- الإدارات -->
+        <div class="col-lg-4 col-md-6">
+            <a asp-controller="Departments"
+               asp-action="Index"
+               class="dashboard-card-link">
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-top">
+                        <div class="dashboard-icon">🏢</div>
+                        <span class="dashboard-card-badge">الإدارات</span>
+                    </div>
+
+                    <div class="dashboard-number">
+                        @ViewBag.DepartmentsCount
+                    </div>
+
+                    <div class="dashboard-card-title">
+                        إجمالي الإدارات
+                    </div>
+
+                    <div class="dashboard-card-footer">
+                        <span>عرض الإدارات</span>
+                        <span>←</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <!-- الموظفون -->
+        <div class="col-lg-4 col-md-6">
+            <a asp-controller="Employees"
+               asp-action="Index"
+               class="dashboard-card-link">
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-top">
+                        <div class="dashboard-icon">👥</div>
+                        <span class="dashboard-card-badge">الموظفون</span>
+                    </div>
+
+                    <div class="dashboard-number">
+                        @ViewBag.EmployeesCount
+                    </div>
+
+                    <div class="dashboard-card-title">
+                        إجمالي الموظفين
+                    </div>
+
+                    <div class="dashboard-card-footer">
+                        <span>عرض الموظفين</span>
+                        <span>←</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <!-- الخدمات -->
+        <div class="col-lg-4 col-md-6">
+            <a asp-controller="Services"
+               asp-action="Index"
+               class="dashboard-card-link">
+
+                <div class="dashboard-card">
+                    <div class="dashboard-card-top">
+                        <div class="dashboard-icon">📋</div>
+                        <span class="dashboard-card-badge">الخدمات</span>
+                    </div>
+
+                    <div class="dashboard-number">
+                        @ViewBag.ServicesCount
+                    </div>
+
+                    <div class="dashboard-card-title">
+                        إجمالي الخدمات
+                    </div>
+
+                    <div class="dashboard-card-footer">
+                        <span>عرض الخدمات</span>
+                        <span>←</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- الإجراءات السريعة -->
+    <section class="dashboard-section mb-4">
+
+        <h3 class="dashboard-section-title">
+            ⚡ إجراءات سريعة
+        </h3>
+
+        <div class="row g-3">
+
+            <!-- إضافة إدارة -->
+            <div class="col-md-4">
+                <a asp-controller="Departments"
+                   asp-action="Create"
+                   class="quick-action">
+                    <span>🏢</span>
+                    إضافة إدارة جديدة
+                </a>
+            </div>
+
+            <!-- إضافة موظف -->
+            <div class="col-md-4">
+                <a asp-controller="Employees"
+                   asp-action="Create"
+                   class="quick-action">
+                    <span>👤</span>
+                    إضافة موظف جديد
+                </a>
+            </div>
+
+            <!-- إضافة خدمة -->
+            <div class="col-md-4">
+                <a asp-controller="Services"
+                   asp-action="Create"
+                   class="quick-action">
+                    <span>📋</span>
+                    إضافة خدمة جديدة
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- أحدث البيانات -->
+    <div class="row g-4">
+
+        <!-- أحدث الموظفين -->
+        <div class="col-xl-6">
+            <section class="dashboard-section h-100">
+
+                <div class="dashboard-section-heading">
+                    <h3 class="dashboard-section-title">
+                        👥 أحدث الموظفين
+                    </h3>
+
+                    <a asp-controller="Employees"
+                       asp-action="Index"
+                       class="dashboard-more-link">
+                        عرض الكل ←
+                    </a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle text-center">
+
+                        <thead>
+                            <tr>
+                                <th>اسم الموظف</th>
+                                <th>المسمى الوظيفي</th>
+                                <th>الإدارة</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (latestEmployees.Any())
+                            {
+                                foreach (var employee in latestEmployees)
+                                {
+                                    <tr>
+                                        <td>@employee.Name</td>
+                                        <td>@employee.JobTitle</td>
+                                        <td>
+                                            @(employee.Department?.Name ?? "غير محددة")
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-muted py-4">
+                                        لا يوجد موظفون حاليًا
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </section>
+        </div>
+
+
+        <!-- أحدث الخدمات -->
+        <div class="col-xl-6">
+            <section class="dashboard-section h-100">
+
+                <div class="dashboard-section-heading">
+                    <h3 class="dashboard-section-title">
+                        📋 أحدث الخدمات
+                    </h3>
+
+                    <a asp-controller="Services"
+                       asp-action="Index"
+                       class="dashboard-more-link">
+                        عرض الكل ←
+                    </a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle text-center">
+
+                        <thead>
+                            <tr>
+                                <th>اسم الخدمة</th>
+                                <th>الإدارة</th>
+                                <th>الوصف</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (latestServices.Any())
+                            {
+                                foreach (var service in latestServices)
+                                {
+                                    <tr>
+                                        <td>@service.Name</td>
+                                        <td>
+                                            @(service.Department?.Name ?? "غير محددة")
+                                        </td>
+                                        <td>@service.Description</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-muted py-4">
+                                        لا توجد خدمات حاليًا
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+</div>

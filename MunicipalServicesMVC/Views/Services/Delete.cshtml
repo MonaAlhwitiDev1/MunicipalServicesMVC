@@ -1,0 +1,123 @@
+﻿@model MunicipalServicesMVC.Domain.Models.Service
+
+@{
+    ViewData["Title"] = "حذف الخدمة";
+}
+
+<div class="container-fluid py-4" dir="rtl">
+
+    <!-- عنوان الصفحة -->
+    <div class="mb-4">
+
+        <h2 class="fw-bold mb-0"
+            style="color:var(--main-green-dark);">
+            حذف الخدمة
+        </h2>
+
+    </div>
+
+    <!-- بطاقة حذف الخدمة -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-9 col-lg-10 col-md-12">
+
+            <div class="card border-0 shadow-sm">
+
+                <!-- الشريط الأخضر -->
+                <div class="card-header bg-success text-white py-3">
+
+                    <h5 class="fw-bold mb-0">
+                        بيانات الخدمة
+                    </h5>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- رسالة تأكيد الحذف -->
+                    <div class="alert alert-danger text-center mb-4">
+
+                        <strong>
+                            هل أنت متأكد من حذف هذه الخدمة؟
+                        </strong>
+
+                    </div>
+
+                    <!-- اسم الخدمة -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            اسم الخدمة
+                        </label>
+
+                        <input type="text"
+                               value="@Model.Name"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <!-- وصف الخدمة -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            وصف الخدمة
+                        </label>
+
+                        <textarea class="form-control"
+                                  rows="4"
+                                  readonly>@Model.Description</textarea>
+
+                    </div>
+
+                    <!-- الإدارة -->
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+                            الإدارة
+                        </label>
+
+                        <input type="text"
+                               value="@Model.Department?.Name"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <!-- نموذج الحذف -->
+                    <form asp-action="Delete" method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <!-- رقم الخدمة -->
+                        <input type="hidden"
+                               asp-for="Id" />
+
+                        <!-- أزرار العمليات -->
+                        <div class="d-flex justify-content-start gap-2 pt-3 border-top">
+
+                            <!-- زر تأكيد الحذف -->
+                            <button type="submit"
+                                    class="btn btn-danger px-4">
+                                تأكيد الحذف
+                            </button>
+
+                            <!-- زر الرجوع -->
+                            <a asp-action="Index"
+                               class="btn btn-warning px-4">
+                                رجوع
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

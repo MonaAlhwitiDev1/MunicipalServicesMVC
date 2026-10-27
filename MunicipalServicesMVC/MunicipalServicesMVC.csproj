@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+
+  <ItemGroup>
+    <None Remove="Data\" />
+    <None Remove="Views\Employees\" />
+    <None Remove="Views\Services\" />
+    <None Remove="Views\Departments\" />
+    <None Remove="Views\Account\" />
+    <None Remove="Views\Roles\" />
+    <None Remove="Views\Permissions\" />
+    <None Remove="Views\Users\" />
+    <None Remove="Repositories\" />
+    <None Remove="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Views\Employees\" />
+    <Folder Include="Views\Services\" />
+    <Folder Include="Views\Departments\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="wwwroot\sbadmin\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Permissions\" />
+    <Folder Include="Views\Users\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\sbadmin\" />
+    <Content Remove="wwwroot\images\" />
+  </ItemGroup>
+
+  <!-- استثناء ملفات المشاريع المستقلة من مشروع Web -->
+  <ItemGroup>
+    <Compile Remove="MunicipalServicesMVC.API/**/*.cs" />
+    <Content Remove="MunicipalServicesMVC.API/**/*" />
+    <None Remove="MunicipalServicesMVC.API/**/*" />
+
+    <Compile Remove="MunicipalServicesMVC.Domain/**/*.cs" />
+    <Content Remove="MunicipalServicesMVC.Domain/**/*" />
+    <None Remove="MunicipalServicesMVC.Domain/**/*" />
+
+    <Compile Remove="MunicipalServicesMVC.Application/**/*.cs" />
+    <Content Remove="MunicipalServicesMVC.Application/**/*" />
+    <None Remove="MunicipalServicesMVC.Application/**/*" />
+
+    <Compile Remove="MunicipalServicesMVC.Infrastructure/**/*.cs" />
+    <Content Remove="MunicipalServicesMVC.Infrastructure/**/*" />
+    <None Remove="MunicipalServicesMVC.Infrastructure/**/*" />
+  </ItemGroup>
+
+  <!-- ربط المشروع الأساسي بالمشاريع الثلاثة -->
+  <ItemGroup>
+    <ProjectReference Include="MunicipalServicesMVC.Domain/MunicipalServicesMVC.Domain.csproj" />
+    <ProjectReference Include="MunicipalServicesMVC.Application/MunicipalServicesMVC.Application.csproj" />
+    <ProjectReference Include="MunicipalServicesMVC.Infrastructure/MunicipalServicesMVC.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

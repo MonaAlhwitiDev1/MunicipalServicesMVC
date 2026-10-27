@@ -1,0 +1,122 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "تسجيل الدخول";
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - نظام إدارة الخدمات البلدية
+    </title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body class="bg-success">
+
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center min-vh-100">
+
+            <div class="col-lg-5 col-md-7">
+
+                <div class="card shadow border-0">
+
+                    <div class="card-body p-4">
+
+                        <div class="text-center mb-4">
+
+                            <img src="/images/tabuk-logo.png"
+                                 alt="شعار أمانة منطقة تبوك"
+                                 class="img-fluid mb-3"
+                                 width="180" />
+
+                            <h3 class="fw-bold">
+                                تسجيل الدخول
+                            </h3>
+
+                        </div>
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger text-center">
+                                @ViewBag.Error
+                            </div>
+                        }
+
+                        <form asp-controller="Account"
+                              asp-action="Login"
+                              method="post">
+
+                            <div class="mb-3">
+
+                                <label for="email"
+                                       class="form-label fw-bold">
+                                    البريد الإلكتروني
+                                </label>
+
+                                <input id="email"
+                                       name="email"
+                                       type="email"
+                                       class="form-control"
+                                       placeholder="أدخل البريد الإلكتروني"
+                                       required />
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label for="password"
+                                       class="form-label fw-bold">
+                                    كلمة المرور
+                                </label>
+
+                                <input id="password"
+                                       name="password"
+                                       type="password"
+                                       class="form-control"
+                                       placeholder="أدخل كلمة المرور"
+                                       required />
+
+                            </div>
+
+                            <div class="text-center">
+
+                                <button type="submit"
+                                        class="btn btn-success px-5">
+                                    تسجيل الدخول
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="card-footer text-center text-muted">
+
+                        نظام إدارة الخدمات البلدية
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

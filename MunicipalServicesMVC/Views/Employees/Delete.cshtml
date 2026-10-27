@@ -1,0 +1,112 @@
+﻿@model MunicipalServicesMVC.Domain.Models.Employee
+
+@{
+    ViewData["Title"] = "حذف الموظف";
+}
+
+<div class="container py-4" dir="rtl">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8 col-md-10">
+
+            <div class="card shadow-sm border-0">
+
+                <!-- عنوان البطاقة -->
+                <div class="card-header bg-success text-white py-3">
+
+                    <h4 class="mb-0">
+                        حذف الموظف
+                    </h4>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- رسالة تأكيد الحذف -->
+                    <div class="alert alert-danger text-center mb-4">
+
+                        <strong>
+                            هل أنت متأكد من حذف هذا الموظف؟
+                        </strong>
+
+                        <div class="mt-2">
+                            سيتم حذف بيانات الموظف بعد التأكيد.
+                        </div>
+
+                    </div>
+
+                    <!-- اسم الموظف -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            اسم الموظف
+                        </label>
+
+                        <input type="text"
+                               value="@Model.Name"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <!-- المسمى الوظيفي -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+                            المسمى الوظيفي
+                        </label>
+
+                        <input type="text"
+                               value="@Model.JobTitle"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <!-- الإدارة -->
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+                            الإدارة
+                        </label>
+
+                        <input type="text"
+                               value="@Model.Department?.Name"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <!-- نموذج الحذف -->
+                    <form asp-action="Delete" method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+
+                            <a asp-action="Index"
+                               class="btn btn-warning px-4">
+                                رجوع
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-danger px-4">
+                                تأكيد الحذف
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

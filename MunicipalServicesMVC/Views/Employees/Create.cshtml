@@ -1,0 +1,135 @@
+﻿@model MunicipalServicesMVC.Domain.Models.Employee
+
+@{
+    ViewData["Title"] = "إضافة موظف جديد";
+}
+
+<div class="container-fluid py-4" dir="rtl">
+
+    <!-- عنوان الصفحة -->
+    <div class="mb-4">
+        <h2 class="fw-bold mb-0"
+            style="color:var(--main-green-dark);">
+            إضافة موظف جديد
+        </h2>
+    </div>
+
+    <!-- بطاقة إضافة الموظف -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-9 col-lg-10 col-md-12">
+
+            <div class="card border-0 shadow-sm">
+
+                <!-- الشريط الأخضر -->
+                <div class="card-header bg-success text-white py-3">
+
+                    <h5 class="fw-bold mb-0">
+                        بيانات الموظف
+                    </h5>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form asp-action="Create" method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <!-- اسم الموظف -->
+                        <div class="mb-3">
+
+                            <label asp-for="Name"
+                                   class="form-label fw-bold">
+                                اسم الموظف
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input asp-for="Name"
+                                   class="form-control"
+                                   placeholder="أدخل اسم الموظف" />
+
+                            <span asp-validation-for="Name"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- المسمى الوظيفي -->
+                        <div class="mb-3">
+
+                            <label asp-for="JobTitle"
+                                   class="form-label fw-bold">
+                                المسمى الوظيفي
+                            </label>
+
+                            <input asp-for="JobTitle"
+                                   class="form-control"
+                                   placeholder="أدخل المسمى الوظيفي" />
+
+                            <span asp-validation-for="JobTitle"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- الإدارة -->
+                        <div class="mb-4">
+
+                            <label asp-for="DepartmentId"
+                                   class="form-label fw-bold">
+                                الإدارة
+                            </label>
+
+                            <select asp-for="DepartmentId"
+                                    asp-items="ViewBag.DepartmentId"
+                                    class="form-select">
+
+                                <option value="">
+                                    اختر الإدارة
+                                </option>
+
+                            </select>
+
+                            <span asp-validation-for="DepartmentId"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- أزرار العمليات -->
+                        <div class="d-flex justify-content-start gap-2 pt-3 border-top">
+
+                            <button type="submit"
+                                    class="btn btn-success px-4">
+                                حفظ الموظف
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-warning px-4">
+                                رجوع
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,18 @@
+﻿# Visual Studio
+.vs/
+.idea/
+*.user
+*.suo
+.DS_Store
+
+# Build files
+**/bin/
+**/obj/
+
+# Local secrets
+**/secrets.json
+**/appsettings.Development.json
+**/appsettings.json
+*.backup
+# Employee uploaded files
+**/wwwroot/Files/Employees/

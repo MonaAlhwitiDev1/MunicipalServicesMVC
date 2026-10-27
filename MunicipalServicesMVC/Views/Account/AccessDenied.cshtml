@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "غير مصرح";
+}
+
+<div class="container mt-5">
+
+    <div class="card border-danger shadow-sm">
+
+        <div class="card-body text-center p-5">
+
+            <h2 class="text-danger mb-3">
+                غير مصرح بالدخول
+            </h2>
+
+            <p class="mb-4">
+                ليس لديك صلاحية للوصول إلى هذه الصفحة.
+            </p>
+
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="btn btn-success">
+                العودة للرئيسية
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

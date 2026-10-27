@@ -1,0 +1,96 @@
+@model List<MunicipalServicesMVC.Application.Dtos.ServiceRequestDto>
+
+@{
+    ViewData["Title"] = "طلبات الخدمات";
+}
+
+<div dir="rtl">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 style="color: #166B50;">طلبات الخدمات</h2>
+
+        <a asp-controller="ServiceRequests"
+           asp-action="Index"
+           class="btn btn-outline-success">
+            تحديث الطلبات
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="mb-0">
+                إجمالي الطلبات: @Model.Count
+            </h5>
+        </div>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            لا توجد طلبات خدمات حتى الآن.
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm">
+            <div class="card-header text-white"
+                 style="background-color: #166B50;">
+                قائمة الطلبات الواردة
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead style="background-color: #166B50; color: white;">
+                            <tr>
+                                <th>رقم الطلب</th>
+                                <th>صاحب الطلب</th>
+                                <th>تاريخ الطلب</th>
+                                <th>الخدمات المطلوبة</th>
+                                <th>الحالة</th>
+                                <th>الملاحظات</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var request in Model)
+                            {
+                                <tr>
+                                    <td>@request.Id</td>
+
+                                    <td>@request.UserName</td>
+
+                                    <td>
+                                        @request.CreatedAt.ToString("yyyy-MM-dd")
+                                    </td>
+
+                                    <td>
+                                        <ul class="mb-0">
+                                            @foreach (var item in request.Items)
+                                            {
+                                                <li>
+    @item.ServiceName
+    <span class="badge bg-success text-white">
+        الكمية: @item.Quantity
+    </span>
+</li>
+                                            }
+
+                                        </ul>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge badge-success bg-success text-white">
+                                            @request.Status
+                                        </span>
+                                    </td>
+
+                                    <td style="white-space: pre-wrap;">@(string.IsNullOrWhiteSpace(request.Notes) ? "—" : request.Notes)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>

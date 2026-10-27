@@ -1,0 +1,137 @@
+﻿@model MunicipalServicesMVC.Domain.Models.Service
+
+@{
+    ViewData["Title"] = "إضافة خدمة";
+}
+
+<div class="container-fluid py-4" dir="rtl">
+
+    <!-- عنوان الصفحة -->
+    <div class="mb-4">
+
+        <h2 class="fw-bold mb-2"
+            style="color:var(--main-green-dark);">
+            إضافة خدمة جديدة
+        </h2>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-8 col-lg-9 col-md-11">
+
+            <div class="card shadow-sm border-0">
+
+                <!-- عنوان البطاقة -->
+                <div class="card-header bg-success text-white py-3">
+
+                    <h5 class="fw-bold mb-0">
+                        بيانات الخدمة
+                    </h5>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- نموذج إضافة الخدمة -->
+                    <form asp-action="Create" method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <!-- اسم الخدمة -->
+                        <div class="mb-4">
+
+                            <label asp-for="Name"
+                                   class="form-label fw-bold">
+                                اسم الخدمة
+                            </label>
+
+                            <input asp-for="Name"
+                                   class="form-control"
+                                   placeholder="أدخل اسم الخدمة" />
+
+                            <span asp-validation-for="Name"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- وصف الخدمة -->
+                        <div class="mb-4">
+
+                            <label asp-for="Description"
+                                   class="form-label fw-bold">
+                                وصف الخدمة
+                            </label>
+
+                            <textarea asp-for="Description"
+                                      class="form-control"
+                                      rows="4"
+                                      placeholder="أدخل وصف الخدمة"></textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- الإدارة -->
+                        <div class="mb-4">
+
+                            <label asp-for="DepartmentId"
+                                   class="form-label fw-bold">
+                                الإدارة
+                            </label>
+
+                            <select asp-for="DepartmentId"
+                                    asp-items="ViewBag.DepartmentId"
+                                    class="form-select">
+
+                                <option value="">
+                                    اختر الإدارة
+                                </option>
+
+                            </select>
+
+                            <span asp-validation-for="DepartmentId"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- أزرار العمليات -->
+                        <div class="d-flex flex-wrap justify-content-end gap-2 pt-3 border-top">
+
+                            <a asp-action="Index"
+                               class="btn btn-warning px-4">
+                                رجوع
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-success px-4">
+                                حفظ الخدمة
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

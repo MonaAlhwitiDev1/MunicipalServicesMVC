@@ -1,0 +1,101 @@
+﻿@model MunicipalServicesMVC.Domain.Models.Permission
+
+@{
+    ViewData["Title"] = "تعديل الصلاحية";
+}
+
+<div class="container-fluid py-4" dir="rtl">
+
+    <!-- عنوان الصفحة -->
+    <div class="mb-4">
+        <h2 class="fw-bold mb-0"
+            style="color:var(--main-green-dark);">
+            تعديل الصلاحية
+        </h2>
+    </div>
+
+    <!-- بطاقة تعديل الصلاحية -->
+    <div class="card border-0 shadow-sm w-100">
+
+        <!-- رأس البطاقة -->
+        <div class="card-header bg-success text-white py-3">
+            <h5 class="fw-bold mb-0">
+                بيانات الصلاحية
+            </h5>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="Edit" method="post">
+
+                @Html.AntiForgeryToken()
+
+                <!-- رقم الصلاحية -->
+                <input type="hidden" asp-for="Id" />
+
+                <!-- رسائل التحقق -->
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3">
+                </div>
+
+                <!-- اسم الصلاحية -->
+                <div class="mb-4">
+                    <label asp-for="Name"
+                           class="form-label fw-bold">
+                        اسم الصلاحية
+                    </label>
+
+                    <input asp-for="Name"
+                           class="form-control"
+                           placeholder="أدخل اسم الصلاحية" />
+
+                    <span asp-validation-for="Name"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <!-- وصف الصلاحية -->
+                <div class="mb-4">
+                    <label asp-for="Description"
+                           class="form-label fw-bold">
+                        الوصف
+                    </label>
+
+                    <textarea asp-for="Description"
+                              class="form-control"
+                              rows="4"
+                              placeholder="أدخل وصف الصلاحية"></textarea>
+
+                    <span asp-validation-for="Description"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <!-- الأزرار -->
+                <div class="d-flex flex-wrap justify-content-end gap-2 pt-3 border-top">
+
+                    <a asp-action="Index"
+                       class="btn btn-warning px-4">
+                        رجوع
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-success px-4">
+                        حفظ التعديلات
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
